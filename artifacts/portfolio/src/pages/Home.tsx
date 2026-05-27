@@ -1,15 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { HeroSection } from '@/components/HeroSection';
 import { HeroErrorBoundary } from '@/components/HeroErrorBoundary';
-import { AnimatedGridBackground } from '@/components/AnimatedGridBackground';
 import { FlowArt, FlowSection } from '@/components/FlowArt';
+import { TechCard } from '@/components/PixelCanvas';
+import { FileTree } from '@/components/FileTree';
+import { RatingInteraction } from '@/components/RatingInteraction';
+import { Perspective, Highlight } from '@/components/Perspective';
+import { Gravity, MatterBody } from '@/components/Gravity';
+import { UnicornSection } from '@/components/UnicornSection';
 import { Github, Linkedin, Mail, ArrowUpRight, Terminal } from 'lucide-react';
 import { motion } from 'framer-motion';
 
+const BG = '#0a0907';
+const BEIGE = '#c9b08c';
+const CREAM = '#ede0cc';
+
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
@@ -17,63 +25,72 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={cn('fixed top-0 left-0 right-0 z-[200] transition-all duration-300', scrolled ? 'bg-background/80 backdrop-blur-md border-b border-white/5 py-4' : 'bg-transparent py-6')}>
+    <nav className={cn('fixed top-0 left-0 right-0 z-[200] transition-all duration-300', scrolled ? 'backdrop-blur-md border-b py-4' : 'bg-transparent py-6')}
+      style={{ background: scrolled ? 'rgba(10,9,7,0.85)' : 'transparent', borderColor: 'rgba(201,176,140,0.1)' }}>
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <a href="#" className="text-xl font-black tracking-tighter text-white">
-          HF<span className="text-primary">.</span>
+        <a href="#" className="text-xl font-black tracking-tighter" style={{ color: CREAM }}>
+          HF<span style={{ color: BEIGE }}>.</span>
         </a>
-        <div className="hidden md:flex items-center gap-8 text-sm font-mono text-white/70">
-          <a href="#about" className="hover:text-primary transition-colors">01. About</a>
-          <a href="#skills" className="hover:text-primary transition-colors">02. Skills</a>
-          <a href="#experience" className="hover:text-primary transition-colors">03. Experience</a>
-          <a href="#projects" className="hover:text-primary transition-colors">04. Projects</a>
+        <div className="hidden md:flex items-center gap-8 text-sm font-mono" style={{ color: 'rgba(237,224,204,0.6)' }}>
+          <a href="#about" className="hover:text-[#c9b08c] transition-colors">01. About</a>
+          <a href="#skills" className="hover:text-[#c9b08c] transition-colors">02. Skills</a>
+          <a href="#experience" className="hover:text-[#c9b08c] transition-colors">03. Experience</a>
+          <a href="#projects" className="hover:text-[#c9b08c] transition-colors">04. Projects</a>
+          <a href="#contact" className="hover:text-[#c9b08c] transition-colors">05. Contact</a>
         </div>
-        <a href="#contact" className="md:hidden text-sm font-mono text-primary">Contact</a>
       </div>
     </nav>
   );
 };
 
-const SectionHeading = ({ title, number }: { title: string, number: string }) => (
-  <div className="flex items-center gap-4 mb-12">
-    <span className="text-primary font-mono text-lg">{number}.</span>
-    <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white">{title}</h2>
-    <div className="h-px bg-white/10 flex-grow ml-4 max-w-[200px]" />
+const SectionLabel = ({ number, title }: { number: string; title: string }) => (
+  <div className="flex items-center gap-4 mb-16">
+    <span className="font-mono text-lg" style={{ color: BEIGE }}>{number}.</span>
+    <h2 className="text-3xl md:text-5xl font-bold tracking-tight" style={{ color: CREAM }}>{title}</h2>
+    <div className="h-px flex-grow ml-4 max-w-[200px]" style={{ background: 'rgba(201,176,140,0.12)' }} />
   </div>
 );
 
 const AboutSection = () => (
-  <section id="about" className="relative min-h-screen flex items-center py-24 z-10">
-    <AnimatedGridBackground className="absolute inset-0" />
-    <div className="container mx-auto px-6 relative z-10">
-      <div className="max-w-3xl">
-        <SectionHeading number="01" title="About Me" />
-        <div className="space-y-6 text-lg text-white/70 leading-relaxed font-sans">
-          <p>
-            I'm a 100% Merit Scholar studying Artificial Intelligence at GIKI, Pakistan. 
-            My focus lies at the intersection of machine learning, data engineering, and scalable 
-            software architecture.
+  <section id="about" className="relative min-h-screen flex items-center py-32 z-10" style={{ background: BG }}>
+    <div className="container mx-auto px-6">
+      <SectionLabel number="01" title="About Me" />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <Perspective maxRotateX={8} maxRotateY={15} smoothing={0.08}>
+          <div className="text-2xl md:text-3xl font-bold leading-relaxed" style={{ color: CREAM }}>
+            I build <Highlight color="beige">intelligent systems</Highlight> that sit at the intersection of{' '}
+            <Highlight color="amber">machine learning</Highlight>,{' '}
+            data engineering, and{' '}
+            <Highlight color="warm">scalable architecture</Highlight>.
+          </div>
+          <p className="mt-6 text-base leading-relaxed font-mono" style={{ color: 'rgba(237,224,204,0.5)', fontSize: '0.85rem' }}>
+            Tilt your screen — or move your mouse.
           </p>
-          <p>
-            Whether it's predicting stock market regimes using ensemble models, extracting 
-            chemical entities via NLP, or building platforms that serve thousands of users, 
-            I build systems that are robust, precise, and impactful.
+        </Perspective>
+
+        <div className="space-y-8">
+          <p className="text-lg leading-relaxed" style={{ color: 'rgba(237,224,204,0.7)' }}>
+            100% Merit Scholar studying Artificial Intelligence at GIKI, Pakistan. Whether it's predicting stock
+            market regimes using ensemble models, extracting chemical entities via NLP, or building platforms
+            serving thousands of users — I build systems that are robust, precise, and impactful.
           </p>
-          <div className="p-6 mt-8 border border-white/10 bg-white/5 backdrop-blur-sm rounded-sm font-mono text-sm">
-            <div className="flex items-center gap-2 mb-4 text-primary">
-              <Terminal size={16} />
-              <span>Education</span>
+
+          <div className="p-6 border" style={{ borderColor: 'rgba(201,176,140,0.15)', background: 'rgba(201,176,140,0.04)' }}>
+            <div className="flex items-center gap-2 mb-6 font-mono text-sm" style={{ color: BEIGE }}>
+              <Terminal size={14} />
+              <span className="tracking-widest text-xs">EDUCATION</span>
             </div>
-            <ul className="space-y-4">
-              <li>
-                <div className="text-white">B.Sc. Artificial Intelligence</div>
-                <div className="text-white/50">GIKI, Pakistan &middot; 100% Merit Scholarship</div>
-              </li>
-              <li>
-                <div className="text-white">CAIE A-Levels</div>
-                <div className="text-white/50">Highbrow College &middot; 100% Merit Scholarship</div>
-              </li>
-            </ul>
+            <div className="space-y-5">
+              <div>
+                <div className="font-bold" style={{ color: CREAM }}>B.Sc. Artificial Intelligence</div>
+                <div className="font-mono text-sm mt-1" style={{ color: 'rgba(201,176,140,0.6)' }}>GIKI, Pakistan &middot; 100% Merit Scholarship</div>
+              </div>
+              <div className="h-px" style={{ background: 'rgba(201,176,140,0.08)' }} />
+              <div>
+                <div className="font-bold" style={{ color: CREAM }}>CAIE A-Levels</div>
+                <div className="font-mono text-sm mt-1" style={{ color: 'rgba(201,176,140,0.6)' }}>Highbrow College &middot; 100% Merit Scholarship</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -81,95 +98,105 @@ const AboutSection = () => (
   </section>
 );
 
-const SkillCategory = ({ title, skills, delay }: { title: string, skills: string[], delay: number }) => (
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5, delay }}
-    className="border border-white/10 bg-black/40 p-6 rounded-sm backdrop-blur-sm hover:border-primary/50 transition-colors"
-  >
-    <h3 className="text-primary font-mono text-sm mb-4 uppercase tracking-widest">{title}</h3>
-    <div className="flex flex-wrap gap-2">
-      {skills.map(skill => (
-        <span key={skill} className="px-3 py-1 bg-white/5 border border-white/5 text-white/80 text-sm rounded-[2px] font-medium">
-          {skill}
-        </span>
-      ))}
-    </div>
-  </motion.div>
-);
+const techCards = [
+  {
+    abbr: 'PY', label: 'Python',
+    skills: ['Pandas', 'NumPy', 'Matplotlib', 'Plotly'],
+    colors: ['#c9b08c22', '#b89a7233', '#a08060aa'],
+  },
+  {
+    abbr: 'ML', label: 'Machine Learning',
+    skills: ['XGBoost', 'LightGBM', 'Scikit-learn', 'BiLSTM', 'SVM'],
+    colors: ['#c9b08c33', '#d4b89622', '#c4a45f44'],
+  },
+  {
+    abbr: 'NLP', label: 'NLP & Transformers',
+    skills: ['BERT', 'NER', 'HuggingFace', 'spaCy'],
+    colors: ['#a0806044', '#b89a7222', '#c9b08c33'],
+  },
+  {
+    abbr: 'OPS', label: 'MLOps & Data',
+    skills: ['Prefect', 'Deepchecks', 'CI/CD', 'Pipeline'],
+    colors: ['#c4a45f33', '#a08060aa', '#b89a7222'],
+  },
+  {
+    abbr: 'WEB', label: 'Web & Databases',
+    skills: ['React', 'TypeScript', 'PostgreSQL', 'Firestore'],
+    colors: ['#c9b08c22', '#d4b89633', '#b89a7244'],
+  },
+  {
+    abbr: 'SYS', label: 'Languages & Systems',
+    skills: ['Python', 'C++', 'SQL', 'R', 'C', 'TypeScript'],
+    colors: ['#a0806033', '#c9b08c44', '#b89a7222'],
+  },
+];
 
 const SkillsSection = () => (
-  <section id="skills" className="relative min-h-screen flex items-center py-24 z-10">
-    <AnimatedGridBackground className="absolute inset-0" />
-    <div className="container mx-auto px-6 relative z-10">
-      <SectionHeading number="02" title="Technical Arsenal" />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
-        <SkillCategory 
-          title="Languages" 
-          skills={['Python', 'C++', 'SQL', 'R', 'TypeScript', 'C']} 
-          delay={0.1} 
-        />
-        <SkillCategory 
-          title="ML & AI" 
-          skills={['Scikit-learn', 'XGBoost', 'LightGBM', 'BiLSTM', 'SVM', 'NER', 'Transformers']} 
-          delay={0.2} 
-        />
-        <SkillCategory 
-          title="MLOps & Data" 
-          skills={['Prefect', 'Deepchecks', 'CI/CD', 'Pandas', 'NumPy', 'Matplotlib', 'Plotly']} 
-          delay={0.3} 
-        />
-        <SkillCategory 
-          title="Web & Databases" 
-          skills={['React', 'PostgreSQL', 'Firestore', 'Streamlit', 'HTML/CSS', 'JavaScript']} 
-          delay={0.4} 
-        />
+  <section id="skills" className="relative py-32 z-10" style={{ background: BG }}>
+    <div className="container mx-auto px-6">
+      <SectionLabel number="02" title="Technical Arsenal" />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0.5">
+        {techCards.map((card, i) => (
+          <motion.div
+            key={card.abbr}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: i * 0.08 }}
+          >
+            <TechCard {...card} />
+          </motion.div>
+        ))}
       </div>
     </div>
   </section>
 );
 
 const ExperienceSection = () => (
-  <section id="experience" className="relative z-10 bg-background">
+  <section id="experience" className="relative z-10" style={{ background: BG }}>
     <div className="container mx-auto px-6 pt-24 pb-12 relative z-20">
-      <SectionHeading number="03" title="Experience" />
+      <SectionLabel number="03" title="Experience" />
     </div>
-    
+
     <FlowArt>
       <FlowSection>
         <div className="max-w-4xl mx-auto">
-          <div className="font-mono text-primary mb-2">Jan 2026 – Present</div>
-          <h3 className="text-4xl font-bold text-white mb-2">Officer Operations</h3>
-          <div className="text-xl text-white/60 mb-8 border-b border-white/10 pb-6">Undergraduate Research Organization (UROG) &middot; GIKI</div>
-          <ul className="space-y-4 text-lg text-white/80 list-disc list-inside ml-4 marker:text-primary">
-            <li>Selected for Core Team out of 200+ applicants; steered process-improvement initiatives attaining 90%+ on-time execution rate across 15+ organizational programs.</li>
-            <li>Conducting NLP research for automated chemical entity extraction using NER and transformer-based models; achieving 78% interim accuracy, targeting 90%+ on a corpus of 500+ scientific documents.</li>
+          <div className="font-mono mb-2 text-sm" style={{ color: BEIGE }}>Jan 2026 – Present</div>
+          <h3 className="text-4xl font-bold mb-2" style={{ color: CREAM }}>Officer Operations</h3>
+          <div className="text-xl mb-8 border-b pb-6" style={{ color: 'rgba(237,224,204,0.5)', borderColor: 'rgba(201,176,140,0.1)' }}>
+            Undergraduate Research Organization (UROG) &middot; GIKI
+          </div>
+          <ul className="space-y-4 text-lg list-disc list-inside ml-4" style={{ color: 'rgba(237,224,204,0.8)' }}>
+            <li style={{ '--tw-prose-bullets': BEIGE } as React.CSSProperties} className="marker:text-[#c9b08c]">Selected for Core Team out of 200+ applicants; steered process-improvement initiatives attaining 90%+ on-time execution rate across 15+ organizational programs.</li>
+            <li className="marker:text-[#c9b08c]">Conducting NLP research for automated chemical entity extraction using NER and transformer-based models; achieving 78% interim accuracy, targeting 90%+ on a corpus of 500+ scientific documents.</li>
           </ul>
         </div>
       </FlowSection>
 
       <FlowSection>
         <div className="max-w-4xl mx-auto">
-          <div className="font-mono text-primary mb-2">Oct 2024 – Present</div>
-          <h3 className="text-4xl font-bold text-white mb-2">Active Member</h3>
-          <div className="text-xl text-white/60 mb-8 border-b border-white/10 pb-6">Team Hammerhead &middot; GIKI</div>
-          <ul className="space-y-4 text-lg text-white/80 list-disc list-inside ml-4 marker:text-primary">
-            <li>Spearheaded sponsorship outreach to 400+ organizations, converting 15%+ into active sponsors.</li>
-            <li>Directly secured funding for 2+ major team engineering and competition initiatives through strategic corporate partnerships.</li>
+          <div className="font-mono mb-2 text-sm" style={{ color: BEIGE }}>Oct 2024 – Present</div>
+          <h3 className="text-4xl font-bold mb-2" style={{ color: CREAM }}>Active Member</h3>
+          <div className="text-xl mb-8 border-b pb-6" style={{ color: 'rgba(237,224,204,0.5)', borderColor: 'rgba(201,176,140,0.1)' }}>
+            Team Hammerhead &middot; GIKI
+          </div>
+          <ul className="space-y-4 text-lg list-disc list-inside ml-4" style={{ color: 'rgba(237,224,204,0.8)' }}>
+            <li className="marker:text-[#c9b08c]">Spearheaded sponsorship outreach to 400+ organizations, converting 15%+ into active sponsors.</li>
+            <li className="marker:text-[#c9b08c]">Directly secured funding for 2+ major team engineering and competition initiatives through strategic corporate partnerships.</li>
           </ul>
         </div>
       </FlowSection>
 
       <FlowSection>
         <div className="max-w-4xl mx-auto">
-          <div className="font-mono text-primary mb-2">Jan 2024 – Aug 2024</div>
-          <h3 className="text-4xl font-bold text-white mb-2">Community & Fundraising Coordinator</h3>
-          <div className="text-xl text-white/60 mb-8 border-b border-white/10 pb-6">OWE Organization</div>
-          <ul className="space-y-4 text-lg text-white/80 list-disc list-inside ml-4 marker:text-primary">
-            <li>Contributed 90+ volunteer hours across 8 months, leading fundraising drives that expanded program reach to 200+ underprivileged students across 3+ communities.</li>
-            <li>Coordinated logistics for 20+ teaching sessions, improving scheduling efficiency by 40% and increasing average session attendance rate by 25%.</li>
+          <div className="font-mono mb-2 text-sm" style={{ color: BEIGE }}>Jan 2024 – Aug 2024</div>
+          <h3 className="text-4xl font-bold mb-2" style={{ color: CREAM }}>Community & Fundraising Coordinator</h3>
+          <div className="text-xl mb-8 border-b pb-6" style={{ color: 'rgba(237,224,204,0.5)', borderColor: 'rgba(201,176,140,0.1)' }}>
+            OWE Organization
+          </div>
+          <ul className="space-y-4 text-lg list-disc list-inside ml-4" style={{ color: 'rgba(237,224,204,0.8)' }}>
+            <li className="marker:text-[#c9b08c]">Contributed 90+ volunteer hours across 8 months, leading fundraising drives that expanded program reach to 200+ underprivileged students across 3+ communities.</li>
+            <li className="marker:text-[#c9b08c]">Coordinated logistics for 20+ teaching sessions, improving scheduling efficiency by 40% and increasing average session attendance rate by 25%.</li>
           </ul>
         </div>
       </FlowSection>
@@ -177,153 +204,282 @@ const ExperienceSection = () => (
   </section>
 );
 
-const ProjectCard = ({ 
-  title, 
-  description, 
-  tech, 
-  github, 
-  metrics 
-}: { 
-  title: string, 
-  description: string, 
-  tech: string[], 
-  github: string,
-  metrics: string[]
-}) => (
-  <motion.div 
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    className="group relative flex flex-col justify-between p-8 border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-colors rounded-sm overflow-hidden"
-  >
-    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
-      <Terminal size={120} className="text-primary translate-x-8 -translate-y-8" />
-    </div>
-    
-    <div className="relative z-10">
-      <div className="flex justify-between items-start mb-6">
-        <h3 className="text-2xl font-bold text-white group-hover:text-primary transition-colors">{title}</h3>
-        <a href={github} target="_blank" rel="noreferrer" className="text-white/50 hover:text-white transition-colors" data-testid="link-github-project">
-          <Github size={24} />
-        </a>
-      </div>
-      <p className="text-white/70 mb-6 leading-relaxed">
-        {description}
-      </p>
-      <ul className="mb-8 space-y-2">
-        {metrics.map((m, i) => (
-          <li key={i} className="flex items-start gap-2 text-sm text-white/60">
-            <ArrowUpRight size={16} className="text-primary shrink-0 mt-0.5" />
-            <span>{m}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-    
-    <div className="flex flex-wrap gap-2 relative z-10 mt-auto pt-6 border-t border-white/10">
-      {tech.map(t => (
-        <span key={t} className="font-mono text-xs text-primary/80">
-          {t}
-        </span>
-      ))}
-    </div>
-  </motion.div>
-);
+const projectTree = [
+  {
+    name: 'KSE-100 Predictive Framework',
+    type: 'folder' as const,
+    children: [
+      { name: 'market_data.py', type: 'file' as const, extension: 'py' },
+      { name: 'train_xgboost.py', type: 'file' as const, extension: 'py' },
+      { name: 'lightgbm_volatility.py', type: 'file' as const, extension: 'py' },
+      { name: 'pipeline.py', type: 'file' as const, extension: 'py' },
+      { name: 'config.json', type: 'file' as const, extension: 'json' },
+      { name: 'README.md', type: 'file' as const, extension: 'md' },
+    ],
+  },
+  {
+    name: 'GIKI Chronicles',
+    type: 'folder' as const,
+    children: [
+      { name: 'app.tsx', type: 'file' as const, extension: 'tsx' },
+      { name: 'database.ts', type: 'file' as const, extension: 'ts' },
+      { name: 'blog_post.ts', type: 'file' as const, extension: 'ts' },
+      { name: 'auth.ts', type: 'file' as const, extension: 'ts' },
+      { name: 'schema.sql', type: 'file' as const, extension: 'json' },
+      { name: 'index.css', type: 'file' as const, extension: 'css' },
+    ],
+  },
+  {
+    name: 'Spendr',
+    type: 'folder' as const,
+    children: [
+      { name: 'dashboard.py', type: 'file' as const, extension: 'py' },
+      { name: 'forecast.py', type: 'file' as const, extension: 'py' },
+      { name: 'analytics.ipynb', type: 'file' as const, extension: 'ipynb' },
+      { name: 'models.py', type: 'file' as const, extension: 'py' },
+      { name: 'requirements.json', type: 'file' as const, extension: 'json' },
+    ],
+  },
+];
 
-const ProjectsSection = () => (
-  <section id="projects" className="relative py-32 bg-background z-10 border-t border-white/5">
-    <div className="container mx-auto px-6">
-      <SectionHeading number="04" title="Selected Works" />
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <ProjectCard 
-          title="KSE-100 Predictive Framework"
-          description="Multi-factor stock-market prediction system integrating 10+ macroeconomic and global indicators for the Pakistan Stock Exchange KSE-100 index."
-          tech={['Python', 'XGBoost', 'LightGBM', 'MLOps', 'Prefect']}
-          github="https://github.com/Sel68/kse-100-alpha"
-          metrics={[
-            'Applied K-Means clustering improving trend-segmentation accuracy by 25%',
-            '~80% classification accuracy with XGBoost; LightGBM for volatility',
-            'Production-grade MLOps pipeline automating 100% of data flow'
-          ]}
-        />
-        <ProjectCard 
-          title="GIKI Chronicles"
-          description="Scalable, database-driven blog platform serving the entire GIKI student community with robust content management."
-          tech={['PostgreSQL', 'React', 'TypeScript', 'Firestore']}
-          github="https://github.com/hamxa296/blog"
-          metrics={[
-            'Grew to 4,000+ registered users rapidly',
-            'Sustaining 500+ daily active users',
-            'Achieved impressive 12% DAU/MAU engagement ratio'
-          ]}
-        />
-        <ProjectCard 
-          title="Spendr"
-          description="Intelligent, interactive expense analytics dashboard with dynamic spend-category breakdowns and forecasting capabilities."
-          tech={['Python', 'Streamlit', 'Scikit-learn', 'Pandas']}
-          github="https://github.com/HarisFarooq23/Spendr-"
-          metrics={[
-            'Real-time financial data visualization',
-            'Regression models trained on historical data',
-            'Accurate monthly expenditure forecasting'
-          ]}
-        />
+const projectMeta: Record<string, { description: string; metrics: string[]; github: string; tech: string[] }> = {
+  'KSE-100 Predictive Framework': {
+    description: 'Multi-factor stock-market prediction system integrating 10+ macroeconomic and global indicators for the Pakistan Stock Exchange.',
+    metrics: ['~80% classification accuracy with XGBoost', 'K-Means clustering improves trend-segmentation by 25%', 'Production-grade MLOps pipeline, 100% automated'],
+    github: 'https://github.com/Sel68/kse-100-alpha',
+    tech: ['Python', 'XGBoost', 'LightGBM', 'Prefect', 'MLOps'],
+  },
+  'GIKI Chronicles': {
+    description: 'Scalable database-driven blog platform serving the entire GIKI student community with robust content management.',
+    metrics: ['4,000+ registered users', '500+ daily active users', '12% DAU/MAU engagement ratio'],
+    github: 'https://github.com/hamxa296/blog',
+    tech: ['React', 'TypeScript', 'PostgreSQL', 'Firestore'],
+  },
+  'Spendr': {
+    description: 'Intelligent interactive expense analytics dashboard with dynamic spend-category breakdowns and forecasting.',
+    metrics: ['Real-time financial data visualization', 'Regression models trained on historical data', 'Accurate monthly expenditure forecasting'],
+    github: 'https://github.com/HarisFarooq23/Spendr-',
+    tech: ['Python', 'Streamlit', 'Scikit-learn', 'Pandas'],
+  },
+};
+
+const ProjectsSection = () => {
+  const [selected, setSelected] = useState('KSE-100 Predictive Framework');
+  const meta = projectMeta[selected];
+
+  return (
+    <section id="projects" className="relative py-32 z-10" style={{ background: BG }}>
+      <div className="container mx-auto px-6">
+        <SectionLabel number="04" title="Selected Works" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          <div>
+            <FileTree
+              data={projectTree.map(p => ({
+                ...p,
+                name: p.name,
+              }))}
+              className="cursor-pointer"
+            />
+            <p className="font-mono text-xs mt-3" style={{ color: 'rgba(201,176,140,0.35)' }}>
+              Click a folder to explore
+            </p>
+          </div>
+
+          <motion.div
+            key={selected}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4 }}
+            className="p-8 border"
+            style={{ borderColor: 'rgba(201,176,140,0.15)', background: 'rgba(201,176,140,0.03)' }}
+          >
+            <div className="flex items-start justify-between mb-6">
+              <h3 className="text-2xl font-bold" style={{ color: CREAM }}>{selected}</h3>
+              <a href={meta.github} target="_blank" rel="noreferrer"
+                className="hover:opacity-100 transition-opacity p-1" style={{ color: 'rgba(201,176,140,0.5)' }}>
+                <Github size={20} />
+              </a>
+            </div>
+            <p className="mb-6 leading-relaxed" style={{ color: 'rgba(237,224,204,0.65)' }}>{meta.description}</p>
+            <ul className="space-y-3 mb-8">
+              {meta.metrics.map((m, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm" style={{ color: 'rgba(237,224,204,0.55)' }}>
+                  <ArrowUpRight size={14} className="shrink-0 mt-0.5" style={{ color: BEIGE }} />
+                  {m}
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-wrap gap-2 pt-6 border-t" style={{ borderColor: 'rgba(201,176,140,0.1)' }}>
+              {meta.tech.map(t => (
+                <span key={t} className="font-mono text-xs px-2 py-1 border" style={{ color: 'rgba(201,176,140,0.7)', borderColor: 'rgba(201,176,140,0.2)' }}>
+                  {t}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        <div className="mt-8 flex gap-4">
+          {Object.keys(projectMeta).map(name => (
+            <button
+              key={name}
+              onClick={() => setSelected(name)}
+              className="font-mono text-xs px-4 py-2 border transition-all"
+              style={{
+                borderColor: selected === name ? BEIGE : 'rgba(201,176,140,0.2)',
+                color: selected === name ? BEIGE : 'rgba(201,176,140,0.4)',
+                background: selected === name ? 'rgba(201,176,140,0.08)' : 'transparent',
+              }}
+            >
+              {name.split(' ').slice(0, 2).join(' ')}
+            </button>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
+
+const gravityTags = [
+  'Python', 'XGBoost', 'React', 'PostgreSQL', 'Pandas',
+  'TypeScript', 'NLP', 'Scikit-learn', 'CI/CD', 'LightGBM',
+  'Prefect', 'BERT', 'NumPy', 'Streamlit', 'Firestore',
+  'SVM', 'MLOps', 'Plotly', 'C++', 'Transformers',
+];
+
+const GravitySection = () => {
+  const gravityRef = useRef<import('@/components/Gravity').GravityRef>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { gravityRef.current?.reset(); } },
+      { threshold: 0.3 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section ref={sectionRef} className="relative z-10 overflow-hidden" style={{ background: BG }}>
+      <div className="container mx-auto px-6 pt-8 pb-4">
+        <div className="text-center mb-2">
+          <p className="font-mono text-xs tracking-[0.3em]" style={{ color: 'rgba(201,176,140,0.35)' }}>
+            DRAG THE TAGS &bull; EVERYTHING FALLS
+          </p>
+        </div>
+      </div>
+      <Gravity
+        ref={gravityRef}
+        gravity={{ x: 0, y: 0.8 }}
+        className="w-full"
+        style={{ height: '380px' }}
+        grabCursor
+      >
+        {gravityTags.map((tag, i) => (
+          <MatterBody
+            key={tag}
+            x={`${8 + (i % 6) * 16}%`}
+            y={`${5 + Math.floor(i / 6) * 30}%`}
+            angle={(i % 5 - 2) * 8}
+            matterBodyOptions={{ friction: 0.3, restitution: 0.5, density: 0.002 }}
+          >
+            <div
+              className="font-mono text-xs px-4 py-2 border whitespace-nowrap select-none"
+              style={{
+                borderColor: 'rgba(201,176,140,0.3)',
+                background: 'rgba(10,9,7,0.9)',
+                color: 'rgba(201,176,140,0.8)',
+                backdropFilter: 'blur(4px)',
+              }}
+            >
+              {tag}
+            </div>
+          </MatterBody>
+        ))}
+      </Gravity>
+    </section>
+  );
+};
 
 const ContactSection = () => (
-  <section id="contact" className="relative py-32 bg-[#050814] z-10 flex flex-col items-center justify-center text-center">
-    <div className="container mx-auto px-6 max-w-2xl">
-      <div className="font-mono text-primary mb-4 text-sm">05. What's Next?</div>
-      <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">Get In Touch</h2>
-      <p className="text-white/60 mb-12 text-lg leading-relaxed">
-        Currently focused on expanding my expertise in AI/ML and looking for new opportunities to build intelligent systems. My inbox is always open.
-      </p>
-      
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-16">
-        <a 
-          href="mailto:harisnetbackup@gmail.com" 
-          className="flex items-center gap-3 px-8 py-4 bg-primary text-white font-mono rounded-[2px] hover:bg-primary/90 hover:-translate-y-1 transition-all"
-          data-testid="button-email"
-        >
-          <Mail size={20} />
-          <span>Say Hello</span>
-        </a>
+  <section id="contact" className="relative py-32 z-10" style={{ background: BG }}>
+    <div className="container mx-auto px-6 max-w-3xl">
+      <SectionLabel number="05" title="Get In Touch" />
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <p className="text-lg leading-relaxed mb-10" style={{ color: 'rgba(237,224,204,0.6)' }}>
+            Currently focused on expanding my expertise in AI/ML and looking for opportunities to build intelligent systems.
+            My inbox is always open.
+          </p>
+          <div className="flex flex-col gap-4">
+            <a
+              href="mailto:harisnetbackup@gmail.com"
+              className="flex items-center gap-3 px-8 py-4 font-mono text-sm transition-all hover:-translate-y-1"
+              style={{ background: BEIGE, color: BG }}
+              data-testid="button-email"
+            >
+              <Mail size={18} />
+              <span>SAY HELLO</span>
+            </a>
+            <div className="flex items-center gap-6 mt-4">
+              <a href="https://github.com/HarisFarooq23" target="_blank" rel="noreferrer"
+                className="flex items-center gap-2 font-mono text-xs transition-all hover:-translate-y-1"
+                style={{ color: 'rgba(201,176,140,0.5)' }}
+                data-testid="link-footer-github">
+                <Github size={16} />
+                <span>GitHub</span>
+              </a>
+              <a href="https://linkedin.com/in/harisfarooq23" target="_blank" rel="noreferrer"
+                className="flex items-center gap-2 font-mono text-xs transition-all hover:-translate-y-1"
+                style={{ color: 'rgba(201,176,140,0.5)' }}
+                data-testid="link-footer-linkedin">
+                <Linkedin size={16} />
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col items-center gap-8 p-8 border"
+          style={{ borderColor: 'rgba(201,176,140,0.12)', background: 'rgba(201,176,140,0.03)' }}>
+          <div className="font-mono text-xs tracking-[0.3em]" style={{ color: 'rgba(201,176,140,0.4)' }}>
+            PORTFOLIO FEEDBACK
+          </div>
+          <RatingInteraction />
+          <p className="font-mono text-xs text-center" style={{ color: 'rgba(201,176,140,0.3)' }}>
+            How did this portfolio make you feel?
+          </p>
+        </div>
       </div>
-      
-      <div className="flex items-center justify-center gap-8">
-        <a href="https://github.com/HarisFarooq23" target="_blank" rel="noreferrer" className="text-white/50 hover:text-white hover:-translate-y-1 transition-all p-2" data-testid="link-footer-github">
-          <span className="sr-only">GitHub</span>
-          <Github size={24} />
-        </a>
-        <a href="https://linkedin.com/in/harisfarooq23" target="_blank" rel="noreferrer" className="text-white/50 hover:text-[#0077b5] hover:-translate-y-1 transition-all p-2" data-testid="link-footer-linkedin">
-          <span className="sr-only">LinkedIn</span>
-          <Linkedin size={24} />
-        </a>
+
+      <div className="mt-24 pt-8 border-t flex items-center justify-between" style={{ borderColor: 'rgba(201,176,140,0.08)' }}>
+        <div className="font-mono text-xs" style={{ color: 'rgba(201,176,140,0.25)' }}>
+          Designed &amp; Built by Haris Farooq
+        </div>
+        <div className="font-mono text-xs" style={{ color: 'rgba(201,176,140,0.25)' }}>
+          &copy; {new Date().getFullYear()}
+        </div>
       </div>
-    </div>
-    
-    <div className="absolute bottom-8 text-white/30 font-mono text-xs text-center w-full">
-      Designed & Built with precision.<br/>
-      &copy; {new Date().getFullYear()} Haris Farooq
     </div>
   </section>
 );
 
 export default function Home() {
   return (
-    <div className="bg-background min-h-screen text-foreground selection:bg-primary selection:text-white">
+    <div style={{ background: BG }} className="min-h-screen">
       <Navbar />
       <HeroErrorBoundary>
         <HeroSection />
       </HeroErrorBoundary>
-      <div className="relative z-10 bg-background shadow-[0_-20px_50px_rgba(0,0,0,0.8)]">
+      <div className="relative z-10" style={{ boxShadow: '0 -30px 80px rgba(0,0,0,0.9)' }}>
         <AboutSection />
+        <UnicornSection />
         <SkillsSection />
         <ExperienceSection />
         <ProjectsSection />
+        <GravitySection />
         <ContactSection />
       </div>
     </div>

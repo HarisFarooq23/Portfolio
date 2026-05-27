@@ -1,0 +1,2 @@
+- [Portfolio black+beige theme](portfolio-theme.md) — primary accent is HSL 35 45% 65% (beige); background 30 15% 4% (warm near-black); hero kept as space-blue since it's a separate Three.js canvas.
+- [Portfolio WebGL fallback](portfolio-webgl.md) — Replit preview has no GPU, so HeroSection always falls back to HeroFallback (CSS stars). In real browsers the Three.js scene renders. HeroErrorBoundary wraps it.
