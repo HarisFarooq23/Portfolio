@@ -234,14 +234,15 @@ const projectTree = [
     ],
   },
   {
-    name: 'Spendr',
+    name: 'GitOracle',
     type: 'folder' as const,
     children: [
-      { name: 'dashboard.py', type: 'file' as const, extension: 'py' },
-      { name: 'forecast.py', type: 'file' as const, extension: 'py' },
-      { name: 'analytics.ipynb', type: 'file' as const, extension: 'ipynb' },
-      { name: 'models.py', type: 'file' as const, extension: 'py' },
-      { name: 'requirements.json', type: 'file' as const, extension: 'json' },
+      { name: 'search_engine.py', type: 'file' as const, extension: 'py' },
+      { name: 'scoring.py', type: 'file' as const, extension: 'py' },
+      { name: 'api.py', type: 'file' as const, extension: 'py' },
+      { name: 'schema.sql', type: 'file' as const, extension: 'json' },
+      { name: 'pipeline.py', type: 'file' as const, extension: 'py' },
+      { name: 'app.tsx', type: 'file' as const, extension: 'tsx' },
     ],
   },
 ];
@@ -259,11 +260,11 @@ const projectMeta: Record<string, { description: string; metrics: string[]; gith
     github: 'https://github.com/hamxa296/blog',
     tech: ['React', 'TypeScript', 'PostgreSQL', 'Firestore'],
   },
-  'Spendr': {
-    description: 'Intelligent interactive expense analytics dashboard with dynamic spend-category breakdowns and forecasting.',
-    metrics: ['Real-time financial data visualization', 'Regression models trained on historical data', 'Accurate monthly expenditure forecasting'],
-    github: 'https://github.com/HarisFarooq23/Spendr-',
-    tech: ['Python', 'Streamlit', 'Scikit-learn', 'Pandas'],
+  'GitOracle': {
+    description: 'Open-source effort intelligence engine that transforms 1.8M+ GitHub repositories into a structured decision-making system — combining hybrid search, heuristic difficulty scoring, and topic intelligence so developers know not just what a project is, but how hard it will be.',
+    metrics: ['1.8M+ repositories indexed in PostgreSQL', 'Hybrid keyword + filter search with effort estimation', 'Dual ingestion: Kaggle dataset + live GitHub API sync'],
+    github: 'https://github.com/HarisFarooq23',
+    tech: ['Python', 'Flask', 'PostgreSQL', 'TypeScript', 'Node.js', 'Firebase'],
   },
 };
 
