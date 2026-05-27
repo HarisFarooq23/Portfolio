@@ -9,7 +9,6 @@ import { RatingInteraction } from '@/components/RatingInteraction';
 import { Perspective, Highlight } from '@/components/Perspective';
 import { LocationMap } from '@/components/LocationMap';
 import { ZoomParallax } from '@/components/ZoomParallax';
-import { UnicornSection } from '@/components/UnicornSection';
 import { Github, Linkedin, Mail, ArrowUpRight, Terminal } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -178,8 +177,12 @@ const ExperienceSection = () => (
         <div className="max-w-4xl mx-auto">
           <div className="font-mono mb-2 text-sm" style={{ color: BEIGE }}>Oct 2024 – Present</div>
           <h3 className="text-4xl font-bold mb-2" style={{ color: CREAM }}>Active Member</h3>
-          <div className="text-xl mb-8 border-b pb-6" style={{ color: 'rgba(237,224,204,0.5)', borderColor: 'rgba(201,176,140,0.1)' }}>
+          <div className="text-xl mb-4 border-b pb-6" style={{ color: 'rgba(237,224,204,0.5)', borderColor: 'rgba(201,176,140,0.1)' }}>
             Team Hammerhead &middot; GIKI
+          </div>
+          <div className="mb-6 px-4 py-3 border-l-2 font-mono text-sm" style={{ borderColor: BEIGE, background: 'rgba(201,176,140,0.06)', color: BEIGE }}>
+            Part of the <strong>Automation Team</strong> — participating in the{' '}
+            <strong>Shell Eco Marathon, Qatar</strong> (upcoming)
           </div>
           <ul className="space-y-4 text-lg list-disc list-inside ml-4" style={{ color: 'rgba(237,224,204,0.8)' }}>
             <li className="marker:text-[#c9b08c]">Spearheaded sponsorship outreach to 400+ organizations, converting 15%+ into active sponsors.</li>
@@ -378,6 +381,119 @@ const GallerySection = () => (
   </section>
 );
 
+const CERTS = [
+  { issuer: 'Stanford Online', title: 'Supervised Machine Learning: Regression and Classification', date: 'Jul 2025', id: '28IX1TMVRS0B' },
+  { issuer: 'Meta', title: 'Introduction to Front-End Development', date: 'Jul 2025', id: 'DDMJJJW35XCX' },
+  { issuer: 'IBM', title: 'Exploratory Data Analysis for Machine Learning', date: 'Jul 2025', id: '7222GZMDA74P' },
+  { issuer: 'IBM', title: 'Machine Learning with Python', date: 'Jul 2025', id: 'AVBVK6SWECGQ' },
+  { issuer: 'DeepLearning.AI', title: 'AI For Everyone', date: 'Jun 2025', id: '4SD588NHDEV3' },
+  { issuer: 'Google', title: 'Google UX Design Specialization', date: 'Jun 2025', id: '58RB8Z05VO4S' },
+  { issuer: 'Google', title: 'Accelerate Your Job Search with AI', date: 'Mar 2025', id: 'TIGB7Q46NWFS' },
+  { issuer: 'Google', title: 'Design a UX for Social Good & Prepare for Jobs', date: 'Jun 2025', id: 'UTUSS25O3LHD' },
+  { issuer: 'Google', title: 'Build Dynamic User Interfaces (UI) for Websites', date: 'Jun 2025', id: 'N4ESMBIOTSDV' },
+  { issuer: 'Google', title: 'Create High-Fidelity Designs and Prototypes in Figma', date: 'Jun 2025', id: 'O3FK8JS4NQX8' },
+  { issuer: 'Google', title: 'Conduct UX Research and Test Early Concepts', date: 'Jun 2025', id: 'H9PAYYMVZKYZ' },
+  { issuer: 'Google', title: 'Build Wireframes and Low-Fidelity Prototypes', date: 'Jun 2025', id: 'LYN2RL90FYV5' },
+  { issuer: 'Google', title: 'Start the UX Design Process: Empathize, Define, and Ideate', date: 'Jun 2025', id: '33OG36IKO6MY' },
+  { issuer: 'Google', title: 'Foundations of User Experience (UX) Design', date: 'Jun 2025', id: 'COVGDN3VICGL' },
+  { issuer: 'Google', title: 'Crash Course on Python', date: 'Apr 2025', id: 'Q88XQ342EQ2H' },
+  { issuer: 'Coursera', title: 'Work with Components in Figma', date: 'Apr 2025', id: 'DGB9AMAOFSPN' },
+  { issuer: 'Coursera', title: 'Create a No-Code Responsive Website with Webflow', date: 'Jun 2025', id: 'A4FUPAV1M6A9' },
+  { issuer: 'IBM', title: 'Generative AI: Prompt Engineering Basics', date: 'Jun 2025', id: 'A5MPZ8A0QT34' },
+  { issuer: 'IBM', title: 'Generative AI: Introduction and Applications', date: 'Apr 2025', id: 'YY1B5Z1CT1V1' },
+  { issuer: 'IBM', title: 'Data Visualization with Python', date: 'Mar 2025', id: '' },
+  { issuer: 'Google Cloud', title: 'Introduction to Image Generation', date: 'Feb 2025', id: '13976783' },
+  { issuer: 'Google Cloud', title: 'Introduction to Large Language Models', date: 'Nov 2024', id: '12665010' },
+  { issuer: 'Google Cloud', title: 'Introduction to Generative AI', date: 'Nov 2024', id: '12664437' },
+];
+
+const ISSUER_COLORS: Record<string, string> = {
+  'Stanford Online': '#8C1515',
+  'Meta': '#0081FB',
+  'IBM': '#1F70C1',
+  'DeepLearning.AI': '#00A3E0',
+  'Google': '#4285F4',
+  'Google Cloud': '#34A853',
+  'Coursera': '#0056D2',
+};
+
+const CertificationsSection = () => {
+  const [filter, setFilter] = React.useState<string>('All');
+  const issuers = ['All', ...Array.from(new Set(CERTS.map(c => c.issuer)))];
+  const visible = filter === 'All' ? CERTS : CERTS.filter(c => c.issuer === filter);
+
+  return (
+    <section id="certifications" className="relative py-24 z-10" style={{ background: BG }}>
+      <div className="container mx-auto px-6 max-w-6xl">
+        <SectionLabel number="08" title="Certifications" />
+        <p className="mt-4 mb-10 text-base" style={{ color: 'rgba(237,224,204,0.45)' }}>
+          {CERTS.length} credentials across AI/ML, UX Design, and Cloud
+        </p>
+
+        {/* Issuer filter tabs */}
+        <div className="flex flex-wrap gap-2 mb-10">
+          {issuers.map(issuer => (
+            <button
+              key={issuer}
+              onClick={() => setFilter(issuer)}
+              className="font-mono text-xs px-3 py-1.5 border transition-all"
+              style={{
+                borderColor: filter === issuer ? BEIGE : 'rgba(201,176,140,0.18)',
+                color: filter === issuer ? BG : 'rgba(201,176,140,0.55)',
+                background: filter === issuer ? BEIGE : 'transparent',
+              }}
+            >
+              {issuer}
+            </button>
+          ))}
+        </div>
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {visible.map((cert, i) => {
+            const accent = ISSUER_COLORS[cert.issuer] ?? BEIGE;
+            return (
+              <motion.div
+                key={cert.id || cert.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.35, delay: (i % 9) * 0.04 }}
+                className="flex flex-col justify-between p-5 border"
+                style={{
+                  borderColor: 'rgba(201,176,140,0.12)',
+                  background: 'rgba(201,176,140,0.03)',
+                  borderLeft: `3px solid ${accent}`,
+                }}
+              >
+                <div>
+                  <div className="font-mono text-xs mb-3 tracking-wider uppercase"
+                    style={{ color: accent, opacity: 0.85 }}>
+                    {cert.issuer}
+                  </div>
+                  <p className="text-sm font-medium leading-snug mb-4" style={{ color: CREAM }}>
+                    {cert.title}
+                  </p>
+                </div>
+                <div className="flex items-end justify-between">
+                  <span className="font-mono text-xs" style={{ color: 'rgba(201,176,140,0.4)' }}>
+                    {cert.date}
+                  </span>
+                  {cert.id && (
+                    <span className="font-mono text-[10px] tracking-wide" style={{ color: 'rgba(201,176,140,0.25)' }}>
+                      {cert.id}
+                    </span>
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const ContactSection = () => (
   <section id="contact" className="relative py-32 z-10" style={{ background: BG }}>
     <div className="container mx-auto px-6 max-w-3xl">
@@ -391,7 +507,7 @@ const ContactSection = () => (
           </p>
           <div className="flex flex-col gap-4">
             <a
-              href="mailto:harisnetbackup@gmail.com"
+              href="mailto:harisfarooqbuilds@gmail.com"
               className="flex items-center gap-3 px-8 py-4 font-mono text-sm transition-all hover:-translate-y-1"
               style={{ background: BEIGE, color: BG }}
               data-testid="button-email"
@@ -407,7 +523,7 @@ const ContactSection = () => (
                 <Github size={16} />
                 <span>GitHub</span>
               </a>
-              <a href="https://linkedin.com/in/harisfarooq23" target="_blank" rel="noreferrer"
+              <a href="https://www.linkedin.com/in/harisfarooq23/" target="_blank" rel="noreferrer"
                 className="flex items-center gap-2 font-mono text-xs transition-all hover:-translate-y-1"
                 style={{ color: 'rgba(201,176,140,0.5)' }}
                 data-testid="link-footer-linkedin">
@@ -451,12 +567,12 @@ export default function Home() {
       </HeroErrorBoundary>
       <div className="relative z-10" style={{ boxShadow: '0 -30px 80px rgba(0,0,0,0.9)' }}>
         <AboutSection />
-        <UnicornSection />
         <SkillsSection />
         <ExperienceSection />
         <ProjectsSection />
         <LocationSection />
         <GallerySection />
+        <CertificationsSection />
         <ContactSection />
       </div>
     </div>
