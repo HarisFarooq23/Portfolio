@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { HeroSection } from '@/components/HeroSection';
 import { HeroErrorBoundary } from '@/components/HeroErrorBoundary';
@@ -7,7 +7,8 @@ import { TechCard } from '@/components/PixelCanvas';
 import { FileTree } from '@/components/FileTree';
 import { RatingInteraction } from '@/components/RatingInteraction';
 import { Perspective, Highlight } from '@/components/Perspective';
-import { Gravity, MatterBody } from '@/components/Gravity';
+import { LocationMap } from '@/components/LocationMap';
+import { ZoomParallax } from '@/components/ZoomParallax';
 import { UnicornSection } from '@/components/UnicornSection';
 import { Github, Linkedin, Mail, ArrowUpRight, Terminal } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -340,67 +341,42 @@ const ProjectsSection = () => {
   );
 };
 
-const gravityTags = [
-  'Python', 'XGBoost', 'React', 'PostgreSQL', 'Pandas',
-  'TypeScript', 'NLP', 'Scikit-learn', 'CI/CD', 'LightGBM',
-  'Prefect', 'BERT', 'NumPy', 'Streamlit', 'Firestore',
-  'SVM', 'MLOps', 'Plotly', 'C++', 'Transformers',
+const galleryImages = [
+  { src: '/image1.jpg', alt: 'Gallery image 1' },
+  { src: '/image2.jpg', alt: 'Gallery image 2' },
+  { src: '/image3.jpg', alt: 'Gallery image 3' },
 ];
 
-const GravitySection = () => {
-  const gravityRef = useRef<import('@/components/Gravity').GravityRef>(null);
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { gravityRef.current?.reset(); } },
-      { threshold: 0.3 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <section ref={sectionRef} className="relative z-10 overflow-hidden" style={{ background: BG }}>
-      <div className="container mx-auto px-6 pt-8 pb-4">
-        <div className="text-center mb-2">
-          <p className="font-mono text-xs tracking-[0.3em]" style={{ color: 'rgba(201,176,140,0.35)' }}>
-            DRAG THE TAGS &bull; EVERYTHING FALLS
+const LocationSection = () => (
+  <section className="relative z-10 py-24" style={{ background: BG }}>
+    <div className="container mx-auto px-6 max-w-5xl">
+      <div className="flex flex-col md:flex-row items-start md:items-center gap-12">
+        <div className="flex-1">
+          <SectionLabel number="06" title="Based In" />
+          <p className="text-lg leading-relaxed mt-6" style={{ color: 'rgba(237,224,204,0.55)' }}>
+            Currently in <span style={{ color: BEIGE }}>Karachi, Pakistan</span> — studying AI &amp; ML at GIKI
+            and building intelligent systems from the edge of the subcontinent.
           </p>
         </div>
+        <div className="flex-shrink-0 flex justify-center md:justify-end">
+          <LocationMap
+            location="Karachi, Pakistan"
+            coordinates="24.8607° N, 67.0011° E"
+          />
+        </div>
       </div>
-      <Gravity
-        ref={gravityRef}
-        gravity={{ x: 0, y: 0.8 }}
-        className="w-full"
-        style={{ height: '380px' }}
-        grabCursor
-      >
-        {gravityTags.map((tag, i) => (
-          <MatterBody
-            key={tag}
-            x={`${8 + (i % 6) * 16}%`}
-            y={`${5 + Math.floor(i / 6) * 30}%`}
-            angle={(i % 5 - 2) * 8}
-            matterBodyOptions={{ friction: 0.3, restitution: 0.5, density: 0.002 }}
-          >
-            <div
-              className="font-mono text-xs px-4 py-2 border whitespace-nowrap select-none"
-              style={{
-                borderColor: 'rgba(201,176,140,0.3)',
-                background: 'rgba(10,9,7,0.9)',
-                color: 'rgba(201,176,140,0.8)',
-                backdropFilter: 'blur(4px)',
-              }}
-            >
-              {tag}
-            </div>
-          </MatterBody>
-        ))}
-      </Gravity>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
+
+const GallerySection = () => (
+  <section className="relative z-10" style={{ background: BG }}>
+    <div className="container mx-auto px-6 max-w-5xl pt-8 pb-4">
+      <SectionLabel number="07" title="Gallery" />
+    </div>
+    <ZoomParallax images={galleryImages} />
+  </section>
+);
 
 const ContactSection = () => (
   <section id="contact" className="relative py-32 z-10" style={{ background: BG }}>
@@ -479,7 +455,8 @@ export default function Home() {
         <SkillsSection />
         <ExperienceSection />
         <ProjectsSection />
-        <GravitySection />
+        <LocationSection />
+        <GallerySection />
         <ContactSection />
       </div>
     </div>
