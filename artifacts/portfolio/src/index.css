@@ -152,6 +152,7 @@
 }
 
 html { scroll-behavior: smooth; }
+*, *::before, *::after { cursor: none !important; }
 
 @layer utilities {
   input[type="search"]::-webkit-search-cancel-button { @apply hidden; }
