@@ -9,7 +9,7 @@ import { RatingInteraction } from '@/components/RatingInteraction';
 import { Perspective, Highlight } from '@/components/Perspective';
 import { LocationMap } from '@/components/LocationMap';
 import { ZoomParallax } from '@/components/ZoomParallax';
-import { ParallaxDivider } from '@/components/ParallaxDivider';
+
 import { Github, Linkedin, Mail, ArrowUpRight, Terminal } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -575,7 +575,6 @@ export default function Home() {
         <LocationSection />
         <GallerySection />
         <CertificationsSection />
-        <ParallaxDivider />
         <ContactSection />
       </div>
     </div>
