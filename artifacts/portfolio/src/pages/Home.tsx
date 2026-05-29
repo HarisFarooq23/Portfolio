@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { HeroSection } from '@/components/HeroSection';
@@ -71,9 +72,7 @@ const AboutSection = () => (
 
         <div className="space-y-8">
           <p className="text-lg leading-relaxed" style={{ color: 'rgba(237,224,204,0.7)' }}>
-            100% Merit Scholar studying Artificial Intelligence at GIKI, Pakistan. Whether it's predicting stock
-            market regimes using ensemble models, extracting chemical entities via NLP, or building platforms
-            serving thousands of users — I build systems that are robust, precise, and impactful.
+            100% Merit Scholar studying Artificial Intelligence at GIKI, — Building systems that are robust, precise, and impactful.
           </p>
 
           <div className="p-6 border" style={{ borderColor: 'rgba(201,176,140,0.15)', background: 'rgba(201,176,140,0.04)' }}>
@@ -175,8 +174,8 @@ const ExperienceSection = () => (
           </div>
           <ul className="space-y-4 text-lg list-disc list-inside ml-4" style={{ color: 'rgba(237,224,204,0.8)' }}>
             <li className="marker:text-[#c9b08c]">Awarded with Hammerhead Excellence Awards for the session 2024-2025 and 2025-2026.</li>
-            <li className="marker:text-[#c9b08c]">Achieved 6th place in Safety at SEMA'26 and actively working to enhance performance through automation-driven improvements and optimization strategies.</li>
-            <li className="marker:text-[#c9b08c]">Coordinated logistics for 20+ teaching sessions, improving scheduling efficiency by 40% and increasing average session attendance rate by 25%.</li>
+            <li className="marker:text-[#c9b08c]">Achieved 6th place in Safety at SEMA'26 .</li>
+            <li className="marker:text-[#c9b08c]">Led design workshop focused on UX and design principles, training technical team members.</li>
             <li className="marker:text-[#c9b08c]">Managed media outreach for the team, generating over 150K impressions over the past year.</li>
           </ul>
         </div>
@@ -196,10 +195,7 @@ const ExperienceSection = () => (
           <ul className="space-y-4 text-lg list-disc list-inside ml-4" style={{ color: 'rgba(237,224,204,0.8)' }}>
             <li className="marker:text-[#c9b08c]">Connected students with resources, mentorship, and opportunities to turn their ideas into viable ventures..</li>
             <li className="marker:text-[#c9b08c]">- Led delegations to following events in academic year 2023-24
-  1. Nasa Space Apps , HU
-  2. ACE , Generations 
-  3. Negotium , Cedar College 
-  4. AKU presidents challenge , AKU</li>
+  Nasa Space Apps , HU - ACE , Generations - Negotium , Cedar College - AKU presidents challenge , AKU</li>
           </ul>
         </div>
       </FlowSection>
