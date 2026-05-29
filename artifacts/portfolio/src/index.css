@@ -68,72 +68,76 @@
 }
 
 :root, .dark {
-  --button-outline: rgba(201,176,140,0.15);
-  --badge-outline: rgba(201,176,140,0.08);
+  --button-outline: rgba(212, 175, 55, 0.15);
+  --badge-outline: rgba(212, 175, 55, 0.08);
   --opaque-button-border-intensity: 9;
-  --elevate-1: rgba(201,176,140,0.04);
-  --elevate-2: rgba(201,176,140,0.09);
+  --elevate-1: rgba(212, 175, 55, 0.04);
+  --elevate-2: rgba(212, 175, 55, 0.09);
 
-  /* Black + Beige palette */
-  --background: 30 15% 4%;
-  --foreground: 35 45% 87%;
-  --border: 35 20% 13%;
+  /* Royal & Minimalist Dark Palette – Deep Charcoal, Rich Gold, Warm Earth */
+  --background: 30 8% 5%;
+  --foreground: 40 20% 92%;
+  --border: 30 10% 14%;
 
-  --card: 30 12% 7%;
-  --card-foreground: 35 45% 87%;
-  --card-border: 35 20% 13%;
+  --card: 30 6% 8%;
+  --card-foreground: 40 20% 92%;
+  --card-border: 30 10% 14%;
 
-  --sidebar: 30 12% 5%;
-  --sidebar-foreground: 35 45% 87%;
-  --sidebar-border: 35 20% 13%;
-  --sidebar-primary: 35 45% 65%;
-  --sidebar-primary-foreground: 30 15% 4%;
-  --sidebar-accent: 30 12% 9%;
-  --sidebar-accent-foreground: 35 45% 87%;
-  --sidebar-ring: 35 45% 65%;
+  --sidebar: 30 6% 6%;
+  --sidebar-foreground: 40 20% 92%;
+  --sidebar-border: 30 10% 14%;
+  --sidebar-primary: 42 75% 50%;
+  --sidebar-primary-foreground: 0 0% 6%;
+  --sidebar-accent: 30 6% 10%;
+  --sidebar-accent-foreground: 40 20% 92%;
+  --sidebar-ring: 42 75% 50%;
 
-  --popover: 30 12% 7%;
-  --popover-foreground: 35 45% 87%;
-  --popover-border: 35 20% 13%;
+  --popover: 30 6% 8%;
+  --popover-foreground: 40 20% 92%;
+  --popover-border: 30 10% 14%;
 
-  /* Beige as the primary accent */
-  --primary: 35 45% 65%;
-  --primary-foreground: 30 15% 4%;
+  /* Primary: Royal Gold */
+  --primary: 42 75% 50%;
+  --primary-foreground: 0 0% 6%;
 
-  --secondary: 35 15% 12%;
-  --secondary-foreground: 35 45% 87%;
+  /* Secondary: Deep Mahogany / Burnished Copper */
+  --secondary: 18 40% 22%;
+  --secondary-foreground: 40 20% 92%;
 
-  --muted: 35 12% 10%;
-  --muted-foreground: 35 20% 48%;
+  /* Muted: Warm Grey-Brown */
+  --muted: 30 5% 12%;
+  --muted-foreground: 35 10% 48%;
 
-  --accent: 35 15% 12%;
-  --accent-foreground: 35 45% 87%;
+  /* Accent: Darker Gold / Bronze */
+  --accent: 38 45% 32%;
+  --accent-foreground: 40 20% 92%;
 
-  --destructive: 0 62.8% 30.6%;
+  --destructive: 0 62.8% 35%;
   --destructive-foreground: 0 0% 100%;
 
-  --input: 35 15% 12%;
-  --ring: 35 45% 65%;
+  --input: 30 6% 12%;
+  --ring: 42 75% 50%;
 
-  --chart-1: 35 45% 65%;
-  --chart-2: 25 50% 55%;
-  --chart-3: 45 40% 60%;
-  --chart-4: 15 45% 55%;
-  --chart-5: 55 35% 58%;
+  /* Chart & accent colors – warm metallic family, no blues or purples */
+  --chart-1: 42 75% 50%;
+  --chart-2: 28 65% 48%;
+  --chart-3: 52 70% 52%;
+  --chart-4: 15 55% 42%;
+  --chart-5: 58 60% 48%;
 
   --app-font-sans: 'Inter', sans-serif;
   --app-font-serif: Georgia, serif;
   --app-font-mono: 'Space Mono', monospace;
-  --radius: .25rem;
+  --radius: 0.25rem;
 
-  --shadow-2xs: 0px 2px 0px 0px hsl(30 15% 4% / 0.2);
-  --shadow-xs: 0px 2px 0px 0px hsl(30 15% 4% / 0.2);
-  --shadow-sm: 0px 2px 0px 0px hsl(30 15% 4% / 0.2), 0px 1px 2px -1px hsl(30 15% 4% / 0.2);
-  --shadow: 0px 2px 0px 0px hsl(30 15% 4% / 0.2), 0px 1px 2px -1px hsl(30 15% 4% / 0.2);
-  --shadow-md: 0px 2px 0px 0px hsl(30 15% 4% / 0.2), 0px 2px 4px -1px hsl(30 15% 4% / 0.2);
-  --shadow-lg: 0px 2px 0px 0px hsl(30 15% 4% / 0.2), 0px 4px 6px -1px hsl(30 15% 4% / 0.2);
-  --shadow-xl: 0px 2px 0px 0px hsl(30 15% 4% / 0.2), 0px 8px 10px -1px hsl(30 15% 4% / 0.2);
-  --shadow-2xl: 0px 2px 0px 0px hsl(30 15% 4% / 0.2);
+  --shadow-2xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.3);
+  --shadow-xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.3);
+  --shadow-sm: 0px 2px 0px 0px hsl(0 0% 0% / 0.3), 0px 1px 2px -1px hsl(0 0% 0% / 0.3);
+  --shadow: 0px 2px 0px 0px hsl(0 0% 0% / 0.3), 0px 1px 2px -1px hsl(0 0% 0% / 0.3);
+  --shadow-md: 0px 2px 0px 0px hsl(0 0% 0% / 0.3), 0px 2px 4px -1px hsl(0 0% 0% / 0.3);
+  --shadow-lg: 0px 2px 0px 0px hsl(0 0% 0% / 0.3), 0px 4px 6px -1px hsl(0 0% 0% / 0.3);
+  --shadow-xl: 0px 2px 0px 0px hsl(0 0% 0% / 0.3), 0px 8px 10px -1px hsl(0 0% 0% / 0.3);
+  --shadow-2xl: 0px 2px 0px 0px hsl(0 0% 0% / 0.3);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 

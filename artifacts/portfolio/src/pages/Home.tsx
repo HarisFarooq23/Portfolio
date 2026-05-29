@@ -160,19 +160,7 @@ const ExperienceSection = () => (
     </div>
 
     <FlowArt>
-      <FlowSection>
-        <div className="max-w-4xl mx-auto">
-          <div className="font-mono mb-2 text-sm" style={{ color: BEIGE }}>Jan 2026 – Present</div>
-          <h3 className="text-4xl font-bold mb-2" style={{ color: CREAM }}>Officer Operations</h3>
-          <div className="text-xl mb-8 border-b pb-6" style={{ color: 'rgba(237,224,204,0.5)', borderColor: 'rgba(201,176,140,0.1)' }}>
-            Undergraduate Research Organization (UROG) &middot; GIKI
-          </div>
-          <ul className="space-y-4 text-lg list-disc list-inside ml-4" style={{ color: 'rgba(237,224,204,0.8)' }}>
-            <li style={{ '--tw-prose-bullets': BEIGE } as React.CSSProperties} className="marker:text-[#c9b08c]">Selected for Core Team out of 200+ applicants; steered process-improvement initiatives attaining 90%+ on-time execution rate across 15+ organizational programs.</li>
-            <li className="marker:text-[#c9b08c]">Conducting NLP research for automated chemical entity extraction using NER and transformer-based models; achieving 78% interim accuracy, targeting 90%+ on a corpus of 500+ scientific documents.</li>
-          </ul>
-        </div>
-      </FlowSection>
+      
 
       <FlowSection>
         <div className="max-w-4xl mx-auto">
@@ -186,8 +174,10 @@ const ExperienceSection = () => (
             <strong>Shell Eco Marathon, Qatar</strong> (upcoming)
           </div>
           <ul className="space-y-4 text-lg list-disc list-inside ml-4" style={{ color: 'rgba(237,224,204,0.8)' }}>
-            <li className="marker:text-[#c9b08c]">Spearheaded sponsorship outreach to 400+ organizations, converting 15%+ into active sponsors.</li>
-            <li className="marker:text-[#c9b08c]">Directly secured funding for 2+ major team engineering and competition initiatives through strategic corporate partnerships.</li>
+            <li className="marker:text-[#c9b08c]">Awarded with Hammerhead Excellence Awards for the session 2024-2025 and 2025-2026.</li>
+            <li className="marker:text-[#c9b08c]">Achieved 6th place in Safety at SEMA'26 and actively working to enhance performance through automation-driven improvements and optimization strategies.</li>
+            <li className="marker:text-[#c9b08c]">Coordinated logistics for 20+ teaching sessions, improving scheduling efficiency by 40% and increasing average session attendance rate by 25%.</li>
+            <li className="marker:text-[#c9b08c]">Managed media outreach for the team, generating over 150K impressions over the past year.</li>
           </ul>
         </div>
       </FlowSection>
@@ -195,13 +185,37 @@ const ExperienceSection = () => (
       <FlowSection>
         <div className="max-w-4xl mx-auto">
           <div className="font-mono mb-2 text-sm" style={{ color: BEIGE }}>Jan 2024 – Aug 2024</div>
-          <h3 className="text-4xl font-bold mb-2" style={{ color: CREAM }}>Community & Fundraising Coordinator</h3>
+          <h3 className="text-4xl font-bold mb-2" style={{ color: CREAM }}>Advisor & CTO</h3>
           <div className="text-xl mb-8 border-b pb-6" style={{ color: 'rgba(237,224,204,0.5)', borderColor: 'rgba(201,176,140,0.1)' }}>
-            OWE Organization
+            Highbrow Entrepreneurship Society 
+          </div>
+          <div className="mb-6 px-4 py-3 border-l-2 font-mono text-sm" style={{ borderColor: BEIGE, background: 'rgba(201,176,140,0.06)', color: BEIGE }}>
+            Awarded as the Most Active Society Bearer <strong>for the session</strong> — participating in the{' '}
+            <strong>2023-2024</strong> 
           </div>
           <ul className="space-y-4 text-lg list-disc list-inside ml-4" style={{ color: 'rgba(237,224,204,0.8)' }}>
-            <li className="marker:text-[#c9b08c]">Contributed 90+ volunteer hours across 8 months, leading fundraising drives that expanded program reach to 200+ underprivileged students across 3+ communities.</li>
-            <li className="marker:text-[#c9b08c]">Coordinated logistics for 20+ teaching sessions, improving scheduling efficiency by 40% and increasing average session attendance rate by 25%.</li>
+            <li className="marker:text-[#c9b08c]">Connected students with resources, mentorship, and opportunities to turn their ideas into viable ventures..</li>
+            <li className="marker:text-[#c9b08c]">- Led delegations to following events in academic year 2023-24
+  1. Nasa Space Apps , HU
+  2. ACE , Generations 
+  3. Negotium , Cedar College 
+  4. AKU presidents challenge , AKU</li>
+          </ul>
+        </div>
+      </FlowSection>
+
+      <FlowSection>
+        <div className="max-w-4xl mx-auto">
+          <div className="font-mono mb-2 text-sm" style={{ color: BEIGE }}>Jan 2026 – Present</div>
+          <h3 className="text-4xl font-bold mb-2" style={{ color: CREAM }}>Officer Operations</h3>
+          <div className="text-xl mb-8 border-b pb-6" style={{ color: 'rgba(237,224,204,0.5)', borderColor: 'rgba(201,176,140,0.1)' }}>
+            Undergraduate Research Organization (UROG) &middot; GIKI
+          </div>
+          <ul className="space-y-4 text-lg list-disc list-inside ml-4" style={{ color: 'rgba(237,224,204,0.8)' }}>
+            <li style={{ '--tw-prose-bullets': BEIGE } as React.CSSProperties} className="marker:text-[#c9b08c]">Selected for Core Team out of 200+ applicants</li>
+            <li className="marker:text-[#c9b08c]">On a mission to promote Undergraduate-level research and innovation at GIKI.</li>
+            <li className="marker:text-[#c9b08c]">Inspired from the Stanford University's Undergraduate Research Opportunities Program (UROP)</li>
+            <li className="marker:text-[#c9b08c]">Conducting NLP research for automated chemical entity extraction using NER and transformer-based models</li>
           </ul>
         </div>
       </FlowSection>
@@ -257,14 +271,14 @@ const projectMeta: Record<string, { description: string; metrics: string[]; gith
   },
   'GIKI Chronicles': {
     description: 'Scalable database-driven blog platform serving the entire GIKI student community with robust content management.',
-    metrics: ['4,000+ registered users', '500+ daily active users', '12% DAU/MAU engagement ratio'],
+    metrics: ['4,000+ Unique visitors','300+ followers', '12% DAU/MAU engagement ratio'],
     github: 'https://github.com/hamxa296/blog',
     tech: ['React', 'TypeScript', 'PostgreSQL', 'Firestore'],
   },
   'GitOracle': {
     description: 'Open-source effort intelligence engine that transforms 1.8M+ GitHub repositories into a structured decision-making system — combining hybrid search, heuristic difficulty scoring, and topic intelligence so developers know not just what a project is, but how hard it will be.',
-    metrics: ['1.8M+ repositories indexed in PostgreSQL', 'Hybrid keyword + filter search with effort estimation', 'Dual ingestion: Kaggle dataset + live GitHub API sync'],
-    github: 'https://github.com/HarisFarooq23',
+    metrics: ['5M+ repositories indexed in PostgreSQL', 'Hybrid keyword + filter search with effort estimation', 'Dual ingestion: Kaggle dataset + live GitHub API sync'],
+    github: 'https://github.com/HarisFarooq23/Project_GitOracle',
     tech: ['Python', 'Flask', 'PostgreSQL', 'TypeScript', 'Node.js', 'Firebase'],
   },
 };
@@ -360,7 +374,7 @@ const LocationSection = () => (
           <SectionLabel number="06" title="Based In" />
           <p className="text-lg leading-relaxed mt-6" style={{ color: 'rgba(237,224,204,0.55)' }}>
             Currently in <span style={{ color: BEIGE }}>Karachi, Pakistan</span> — studying AI &amp; ML at GIKI
-            and building intelligent systems from the edge of the subcontinent.
+            and building intelligent systems from the edge.
           </p>
         </div>
         <div className="flex-shrink-0 flex justify-center md:justify-end">
@@ -410,13 +424,13 @@ const CERTS = [
 ];
 
 const ISSUER_COLORS: Record<string, string> = {
-  'Stanford Online': '#8C1515',
-  'Meta': '#0081FB',
-  'IBM': '#1F70C1',
-  'DeepLearning.AI': '#00A3E0',
-  'Google': '#4285F4',
-  'Google Cloud': '#34A853',
-  'Coursera': '#0056D2',
+  'Stanford Online': '#B91C1C',   // red
+  'Meta': '#1877F2',
+  'IBM': '#0F62FE',
+  'DeepLearning.AI': '#FF6F00',
+  'Google': '#34A853',            // green
+  'Google Cloud': '#1A73E8',
+  'Coursera': '#3C4F76',
 };
 
 const CertificationsSection = () => {

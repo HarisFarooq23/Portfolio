@@ -318,8 +318,8 @@ export const HeroSection = () => {
     <div ref={containerRef} className="hero-container cosmos-style">
       <canvas ref={canvasRef} className="hero-canvas" />
       <div ref={menuRef} className="side-menu" style={{ visibility: 'hidden' }}>
-        <div className="menu-icon"><span></span><span></span><span></span></div>
-        <div className="vertical-text">HARIS FAROOQ</div>
+        
+        
       </div>
       <div className="hero-content cosmos-content">
         <h1 ref={titleRef} className="hero-title" style={{ visibility: 'hidden' }}>
