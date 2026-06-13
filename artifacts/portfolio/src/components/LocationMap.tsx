@@ -250,16 +250,15 @@ export function LocationMap({
       </motion.div>
 
       <motion.p
-        className="absolute -bottom-6 left-1/2 text-[10px] text-muted-foreground whitespace-nowrap"
+        className="absolute -bottom-6 left-1/2 text-[10px] font-mono tracking-wider uppercase whitespace-nowrap"
         style={{ x: "-50%" }}
-        initial={{ opacity: 0 }}
         animate={{
-          opacity: isHovered && !isExpanded ? 1 : 0,
-          y: isHovered ? 0 : 4,
+          opacity: isExpanded ? 0 : 0.7,
+          y: isHovered ? -1 : 0,
         }}
         transition={{ duration: 0.2 }}
       >
-        Click to expand
+        <span className="text-muted-foreground">Click to expand</span>
       </motion.p>
     </motion.div>
   )

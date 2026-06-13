@@ -1,13 +1,15 @@
+
 import React, { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { HeroSection } from '@/components/HeroSection';
 import { HeroErrorBoundary } from '@/components/HeroErrorBoundary';
 import { FlowArt, FlowSection } from '@/components/FlowArt';
-import { TechCard } from '@/components/PixelCanvas';
+import { Gravity, MatterBody } from '@/components/Gravity';
 import { FileTree } from '@/components/FileTree';
 import { RatingInteraction } from '@/components/RatingInteraction';
 import { Perspective, Highlight } from '@/components/Perspective';
 import { LocationMap } from '@/components/LocationMap';
+import { LocationCard } from '@/components/LocationCard';
 import { ZoomParallax } from '@/components/ZoomParallax';
 
 import { Github, Linkedin, Mail, ArrowUpRight, Terminal } from 'lucide-react';
@@ -71,9 +73,7 @@ const AboutSection = () => (
 
         <div className="space-y-8">
           <p className="text-lg leading-relaxed" style={{ color: 'rgba(237,224,204,0.7)' }}>
-            100% Merit Scholar studying Artificial Intelligence at GIKI, Pakistan. Whether it's predicting stock
-            market regimes using ensemble models, extracting chemical entities via NLP, or building platforms
-            serving thousands of users — I build systems that are robust, precise, and impactful.
+            100% Merit Scholar studying Artificial Intelligence at GIKI, — Building systems that are robust, precise, and impactful.
           </p>
 
           <div className="p-6 border" style={{ borderColor: 'rgba(201,176,140,0.15)', background: 'rgba(201,176,140,0.04)' }}>
@@ -103,54 +103,246 @@ const techCards = [
   {
     abbr: 'PY', label: 'Python',
     skills: ['Pandas', 'NumPy', 'Matplotlib', 'Plotly'],
-    colors: ['#c9b08c22', '#b89a7233', '#a08060aa'],
+    theme: {
+      bg: 'rgba(16, 185, 129, 0.1)',
+      border: 'rgba(52, 211, 153, 0.35)',
+      abbr: 'rgba(52, 211, 153, 0.4)',
+      label: '#34D399',
+      tagBorder: 'rgba(52, 211, 153, 0.25)',
+      tagText: 'rgba(167, 243, 208, 0.9)',
+    },
   },
   {
     abbr: 'ML', label: 'Machine Learning',
     skills: ['XGBoost', 'LightGBM', 'Scikit-learn', 'BiLSTM', 'SVM'],
-    colors: ['#c9b08c33', '#d4b89622', '#c4a45f44'],
+    theme: {
+      bg: 'rgba(139, 92, 246, 0.1)',
+      border: 'rgba(167, 139, 250, 0.35)',
+      abbr: 'rgba(167, 139, 250, 0.4)',
+      label: '#A78BFA',
+      tagBorder: 'rgba(167, 139, 250, 0.25)',
+      tagText: 'rgba(221, 214, 254, 0.9)',
+    },
   },
   {
     abbr: 'NLP', label: 'NLP & Transformers',
     skills: ['BERT', 'NER', 'HuggingFace', 'spaCy'],
-    colors: ['#a0806044', '#b89a7222', '#c9b08c33'],
+    theme: {
+      bg: 'rgba(244, 114, 182, 0.1)',
+      border: 'rgba(244, 114, 182, 0.35)',
+      abbr: 'rgba(244, 114, 182, 0.4)',
+      label: '#F472B6',
+      tagBorder: 'rgba(244, 114, 182, 0.25)',
+      tagText: 'rgba(252, 231, 243, 0.9)',
+    },
   },
   {
     abbr: 'OPS', label: 'MLOps & Data',
     skills: ['Prefect', 'Deepchecks', 'CI/CD', 'Pipeline'],
-    colors: ['#c4a45f33', '#a08060aa', '#b89a7222'],
+    theme: {
+      bg: 'rgba(245, 158, 11, 0.1)',
+      border: 'rgba(251, 191, 36, 0.35)',
+      abbr: 'rgba(251, 191, 36, 0.4)',
+      label: '#FBBF24',
+      tagBorder: 'rgba(251, 191, 36, 0.25)',
+      tagText: 'rgba(254, 243, 199, 0.9)',
+    },
   },
   {
     abbr: 'WEB', label: 'Web & Databases',
     skills: ['React', 'TypeScript', 'PostgreSQL', 'Firestore'],
-    colors: ['#c9b08c22', '#d4b89633', '#b89a7244'],
+    theme: {
+      bg: 'rgba(56, 189, 248, 0.1)',
+      border: 'rgba(56, 189, 248, 0.35)',
+      abbr: 'rgba(56, 189, 248, 0.4)',
+      label: '#38BDF8',
+      tagBorder: 'rgba(56, 189, 248, 0.25)',
+      tagText: 'rgba(224, 242, 254, 0.9)',
+    },
   },
   {
     abbr: 'SYS', label: 'Languages & Systems',
     skills: ['Python', 'C++', 'SQL', 'R', 'C', 'TypeScript'],
-    colors: ['#a0806033', '#c9b08c44', '#b89a7222'],
+    theme: {
+      bg: 'rgba(155, 45, 66, 0.12)',
+      border: 'rgba(196, 91, 107, 0.35)',
+      abbr: 'rgba(196, 91, 107, 0.45)',
+      label: '#C45B6B',
+      tagBorder: 'rgba(196, 91, 107, 0.25)',
+      tagText: 'rgba(252, 218, 222, 0.9)',
+    },
   },
+];
+
+const skillPositions = [
+  { x: '12%', y: '8%' },
+  { x: '42%', y: '5%' },
+  { x: '72%', y: '10%' },
+  { x: '22%', y: '18%' },
+  { x: '58%', y: '14%' },
+  { x: '85%', y: '20%' },
 ];
 
 const SkillsSection = () => (
   <section id="skills" className="relative py-32 z-10" style={{ background: BG }}>
     <div className="container mx-auto px-6">
       <SectionLabel number="02" title="Technical Arsenal" />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0.5">
-        {techCards.map((card, i) => (
-          <motion.div
-            key={card.abbr}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.08 }}
-          >
-            <TechCard {...card} />
-          </motion.div>
-        ))}
+      <div className="flex items-center gap-3 mb-6 -mt-10">
+        <span className="font-mono text-xs tracking-[0.2em] uppercase px-3 py-1.5 border"
+          style={{ color: BEIGE, borderColor: 'rgba(201,176,140,0.35)', background: 'rgba(201,176,140,0.08)' }}>
+          Grab &amp; throw
+        </span>
+        <span className="font-mono text-sm" style={{ color: 'rgba(237,224,204,0.55)' }}>
+          — explore the stack
+        </span>
+      </div>
+      <div
+        className="relative w-full h-[min(560px,70vh)] border overflow-hidden"
+        style={{ borderColor: 'rgba(201,176,140,0.12)', background: 'rgba(201,176,140,0.02)' }}
+      >
+        <Gravity grabCursor addTopWall>
+          {techCards.map((card, i) => (
+            <MatterBody
+              key={card.abbr}
+              x={skillPositions[i].x}
+              y={skillPositions[i].y}
+              angle={i % 2 === 0 ? -4 : 5}
+              className="w-[220px] sm:w-[240px]"
+            >
+              <div
+                className="border p-5 select-none rounded-sm"
+                style={{
+                  borderColor: card.theme.border,
+                  background: card.theme.bg,
+                  backdropFilter: 'blur(8px)',
+                  boxShadow: `0 4px 24px ${card.theme.bg}`,
+                }}
+              >
+                <div
+                  className="text-4xl font-black tracking-tighter font-mono mb-2"
+                  style={{ color: card.theme.abbr }}
+                >
+                  {card.abbr}
+                </div>
+                <div
+                  className="text-xs font-mono tracking-widest uppercase mb-3"
+                  style={{ color: card.theme.label }}
+                >
+                  {card.label}
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {card.skills.map((s) => (
+                    <span
+                      key={s}
+                      className="px-2 py-0.5 text-[10px] font-mono border rounded-[2px]"
+                      style={{
+                        borderColor: card.theme.tagBorder,
+                        color: card.theme.tagText,
+                        background: 'rgba(10,9,7,0.4)',
+                      }}
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </MatterBody>
+          ))}
+        </Gravity>
       </div>
     </div>
   </section>
+);
+
+const experienceThemes = [
+  {
+    bg: '#0c0809',
+    date: '#C45B6B',
+    title: '#EDE0CC',
+    subtitle: 'rgba(237,224,204,0.5)',
+    border: 'rgba(155, 45, 66, 0.2)',
+    calloutBg: 'rgba(155, 45, 66, 0.08)',
+    calloutBorder: '#9B2D42',
+    calloutText: '#D4848F',
+    body: 'rgba(237,224,204,0.78)',
+    marker: '#9B2D42',
+  },
+  {
+    bg: '#080c0e',
+    date: '#5A9FB5',
+    title: '#EDE0CC',
+    subtitle: 'rgba(237,224,204,0.5)',
+    border: 'rgba(61, 122, 140, 0.2)',
+    calloutBg: 'rgba(61, 122, 140, 0.08)',
+    calloutBorder: '#3D7A8C',
+    calloutText: '#7AB8CC',
+    body: 'rgba(237,224,204,0.78)',
+    marker: '#3D7A8C',
+  },
+  {
+    bg: '#0c0a08',
+    date: '#B89A60',
+    title: '#EDE0CC',
+    subtitle: 'rgba(237,224,204,0.5)',
+    border: 'rgba(138, 115, 68, 0.2)',
+    calloutBg: 'rgba(138, 115, 68, 0.08)',
+    calloutBorder: '#8A7344',
+    calloutText: '#C9A96E',
+    body: 'rgba(237,224,204,0.78)',
+    marker: '#8A7344',
+  },
+] as const;
+
+const ExperienceCard = ({
+  theme,
+  date,
+  title,
+  org,
+  callout,
+  bullets,
+}: {
+  theme: (typeof experienceThemes)[number];
+  date: string;
+  title: string;
+  org: string;
+  callout?: React.ReactNode;
+  bullets: string[];
+}) => (
+  <>
+    <div className="w-full max-w-4xl shrink-0">
+      <div className="font-mono mb-2 text-sm" style={{ color: theme.date }}>{date}</div>
+      <h3 className="text-3xl md:text-4xl font-bold mb-2 tracking-tight" style={{ color: theme.title }}>{title}</h3>
+      <div
+        className="text-lg md:text-xl border-b pb-4"
+        style={{ color: theme.subtitle, borderColor: theme.border }}
+      >
+        {org}
+      </div>
+      {callout && (
+        <div
+          className="mt-4 px-4 py-3 border-l-2 font-mono text-sm leading-relaxed"
+          style={{
+            borderColor: theme.calloutBorder,
+            background: theme.calloutBg,
+            color: theme.calloutText,
+          }}
+        >
+          {callout}
+        </div>
+      )}
+    </div>
+
+    <ul className="w-full max-w-4xl space-y-3 shrink-0">
+      {bullets.map((item) => (
+        <li key={item} className="flex gap-3 leading-relaxed text-base md:text-lg">
+          <span className="shrink-0 select-none" style={{ color: theme.marker }} aria-hidden="true">
+            —
+          </span>
+          <span style={{ color: theme.body }}>{item}</span>
+        </li>
+      ))}
+    </ul>
+  </>
 );
 
 const ExperienceSection = () => (
@@ -159,65 +351,59 @@ const ExperienceSection = () => (
       <SectionLabel number="03" title="Experience" />
     </div>
 
-    <FlowArt>
-      
-
-      <FlowSection>
-        <div className="max-w-4xl mx-auto">
-          <div className="font-mono mb-2 text-sm" style={{ color: BEIGE }}>Oct 2024 – Present</div>
-          <h3 className="text-4xl font-bold mb-2" style={{ color: CREAM }}>Active Member</h3>
-          <div className="text-xl mb-4 border-b pb-6" style={{ color: 'rgba(237,224,204,0.5)', borderColor: 'rgba(201,176,140,0.1)' }}>
-            Team Hammerhead &middot; GIKI
-          </div>
-          <div className="mb-6 px-4 py-3 border-l-2 font-mono text-sm" style={{ borderColor: BEIGE, background: 'rgba(201,176,140,0.06)', color: BEIGE }}>
-            Part of the <strong>Automation Team</strong> — participating in the{' '}
-            <strong>Shell Eco Marathon, Qatar</strong> (upcoming)
-          </div>
-          <ul className="space-y-4 text-lg list-disc list-inside ml-4" style={{ color: 'rgba(237,224,204,0.8)' }}>
-            <li className="marker:text-[#c9b08c]">Awarded with Hammerhead Excellence Awards for the session 2024-2025 and 2025-2026.</li>
-            <li className="marker:text-[#c9b08c]">Achieved 6th place in Safety at SEMA'26 and actively working to enhance performance through automation-driven improvements and optimization strategies.</li>
-            <li className="marker:text-[#c9b08c]">Coordinated logistics for 20+ teaching sessions, improving scheduling efficiency by 40% and increasing average session attendance rate by 25%.</li>
-            <li className="marker:text-[#c9b08c]">Managed media outreach for the team, generating over 150K impressions over the past year.</li>
-          </ul>
-        </div>
+    <FlowArt aria-label="Experience scroll">
+      <FlowSection sectionStyle={{ background: experienceThemes[0].bg }}>
+        <ExperienceCard
+          theme={experienceThemes[0]}
+          date="Oct 2024 – Present"
+          title="Active Member"
+          org="Team Hammerhead · GIKI"
+          callout={
+            <>
+              Part of the <strong style={{ color: experienceThemes[0].title }}>Automation Team</strong> — participating in the{' '}
+              <strong style={{ color: experienceThemes[0].title }}>Shell Eco Marathon, Qatar</strong> (upcoming)
+            </>
+          }
+          bullets={[
+            'Awarded with Hammerhead Excellence Awards for the session 2024-2025 and 2025-2026.',
+            "Achieved 6th place in Safety at SEMA'26.",
+            'Led design workshop focused on UX and design principles, training technical team members.',
+            'Managed media outreach for the team, generating over 150K impressions over the past year.',
+          ]}
+        />
       </FlowSection>
 
-      <FlowSection>
-        <div className="max-w-4xl mx-auto">
-          <div className="font-mono mb-2 text-sm" style={{ color: BEIGE }}>Jan 2024 – Aug 2024</div>
-          <h3 className="text-4xl font-bold mb-2" style={{ color: CREAM }}>Advisor & CTO</h3>
-          <div className="text-xl mb-8 border-b pb-6" style={{ color: 'rgba(237,224,204,0.5)', borderColor: 'rgba(201,176,140,0.1)' }}>
-            Highbrow Entrepreneurship Society 
-          </div>
-          <div className="mb-6 px-4 py-3 border-l-2 font-mono text-sm" style={{ borderColor: BEIGE, background: 'rgba(201,176,140,0.06)', color: BEIGE }}>
-            Awarded as the Most Active Society Bearer <strong>for the session</strong> — participating in the{' '}
-            <strong>2023-2024</strong> 
-          </div>
-          <ul className="space-y-4 text-lg list-disc list-inside ml-4" style={{ color: 'rgba(237,224,204,0.8)' }}>
-            <li className="marker:text-[#c9b08c]">Connected students with resources, mentorship, and opportunities to turn their ideas into viable ventures..</li>
-            <li className="marker:text-[#c9b08c]">- Led delegations to following events in academic year 2023-24
-  1. Nasa Space Apps , HU
-  2. ACE , Generations 
-  3. Negotium , Cedar College 
-  4. AKU presidents challenge , AKU</li>
-          </ul>
-        </div>
+      <FlowSection sectionStyle={{ background: experienceThemes[1].bg }}>
+        <ExperienceCard
+          theme={experienceThemes[1]}
+          date="Jan 2024 – Aug 2024"
+          title="Advisor & CTO"
+          org="Highbrow Entrepreneurship Society"
+          callout={
+            <>
+              Awarded as the Most Active Society Bearer <strong style={{ color: experienceThemes[1].title }}>for the session 2023-2024</strong>
+            </>
+          }
+          bullets={[
+            'Connected students with resources, mentorship, and opportunities to turn their ideas into viable ventures.',
+            'Led delegations to NASA Space Apps, HU-ACE, Generations Negotium, Cedar College AKU Presidents Challenge, and AKU events in academic year 2023-24.',
+          ]}
+        />
       </FlowSection>
 
-      <FlowSection>
-        <div className="max-w-4xl mx-auto">
-          <div className="font-mono mb-2 text-sm" style={{ color: BEIGE }}>Jan 2026 – Present</div>
-          <h3 className="text-4xl font-bold mb-2" style={{ color: CREAM }}>Officer Operations</h3>
-          <div className="text-xl mb-8 border-b pb-6" style={{ color: 'rgba(237,224,204,0.5)', borderColor: 'rgba(201,176,140,0.1)' }}>
-            Undergraduate Research Organization (UROG) &middot; GIKI
-          </div>
-          <ul className="space-y-4 text-lg list-disc list-inside ml-4" style={{ color: 'rgba(237,224,204,0.8)' }}>
-            <li style={{ '--tw-prose-bullets': BEIGE } as React.CSSProperties} className="marker:text-[#c9b08c]">Selected for Core Team out of 200+ applicants</li>
-            <li className="marker:text-[#c9b08c]">On a mission to promote Undergraduate-level research and innovation at GIKI.</li>
-            <li className="marker:text-[#c9b08c]">Inspired from the Stanford University's Undergraduate Research Opportunities Program (UROP)</li>
-            <li className="marker:text-[#c9b08c]">Conducting NLP research for automated chemical entity extraction using NER and transformer-based models</li>
-          </ul>
-        </div>
+      <FlowSection sectionStyle={{ background: experienceThemes[2].bg }}>
+        <ExperienceCard
+          theme={experienceThemes[2]}
+          date="Jan 2026 – Present"
+          title="Officer Operations"
+          org="Undergraduate Research Organization (UROG) · GIKI"
+          bullets={[
+            'Selected for Core Team out of 200+ applicants.',
+            'On a mission to promote undergraduate-level research and innovation at GIKI.',
+            "Inspired by Stanford University's Undergraduate Research Opportunities Program (UROP).",
+            'Conducting NLP research for automated chemical entity extraction using NER and transformer-based models.',
+          ]}
+        />
       </FlowSection>
     </FlowArt>
   </section>
@@ -397,6 +583,36 @@ const GallerySection = () => (
   </section>
 );
 
+const RESUME_URL =
+  'https://drive.google.com/file/d/16uqtB388Pk0z3cZ4xmoS-8Z-TP0HQBHt/view?usp=sharing';
+
+const ResumeSection = () => (
+  <section id="resume" className="relative z-10 py-24" style={{ background: BG }}>
+    <div className="container mx-auto px-6 max-w-5xl">
+      <div className="flex flex-col md:flex-row items-start md:items-center gap-12">
+        <div className="flex-1">
+          <SectionLabel number="08" title="Resume" />
+          <p className="text-lg leading-relaxed mt-6" style={{ color: 'rgba(237,224,204,0.55)' }}>
+            Grab a copy of my resume 
+          </p>
+        </div>
+        <div className="flex-shrink-0 flex justify-center md:justify-end w-full md:w-auto">
+          <LocationCard
+            imageUrl="/resume-preview.svg"
+            imageAlt="Preview of Haris Farooq's resume"
+            location="Haris Farooq"
+            country="Resume"
+            href={RESUME_URL}
+            actionLabel="Get"
+            actionAriaLabel="Download Haris Farooq's resume"
+            className="border-[rgba(201,176,140,0.15)] shadow-[0_8px_32px_rgba(0,0,0,0.35)]"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
 const CERTS = [
   { issuer: 'Stanford Online', title: 'Supervised Machine Learning: Regression and Classification', date: 'Jul 2025', id: '28IX1TMVRS0B' },
   { issuer: 'Meta', title: 'Introduction to Front-End Development', date: 'Jul 2025', id: 'DDMJJJW35XCX' },
@@ -441,7 +657,7 @@ const CertificationsSection = () => {
   return (
     <section id="certifications" className="relative py-24 z-10" style={{ background: BG }}>
       <div className="container mx-auto px-6 max-w-6xl">
-        <SectionLabel number="08" title="Certifications" />
+        <SectionLabel number="09" title="Certifications" />
         <p className="mt-4 mb-10 text-base" style={{ color: 'rgba(237,224,204,0.45)' }}>
           {CERTS.length} credentials across AI/ML, UX Design, and Cloud
         </p>
@@ -588,6 +804,7 @@ export default function Home() {
         <ProjectsSection />
         <LocationSection />
         <GallerySection />
+        <ResumeSection />
         <CertificationsSection />
         <ContactSection />
       </div>

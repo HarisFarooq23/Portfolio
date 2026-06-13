@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#0a0907"/>
+  <rect x="80" y="60" width="640" height="480" rx="8" fill="#12100d" stroke="rgba(201,176,140,0.25)" stroke-width="2"/>
+  <rect x="120" y="100" width="220" height="18" rx="4" fill="#ede0cc"/>
+  <rect x="120" y="132" width="160" height="10" rx="3" fill="rgba(201,176,140,0.55)"/>
+  <rect x="120" y="180" width="520" height="8" rx="2" fill="rgba(237,224,204,0.18)"/>
+  <rect x="120" y="200" width="480" height="8" rx="2" fill="rgba(237,224,204,0.14)"/>
+  <rect x="120" y="220" width="500" height="8" rx="2" fill="rgba(237,224,204,0.14)"/>
+  <rect x="120" y="260" width="140" height="12" rx="3" fill="#c9b08c"/>
+  <rect x="120" y="286" width="520" height="8" rx="2" fill="rgba(237,224,204,0.16)"/>
+  <rect x="120" y="306" width="460" height="8" rx="2" fill="rgba(237,224,204,0.12)"/>
+  <rect x="120" y="326" width="490" height="8" rx="2" fill="rgba(237,224,204,0.12)"/>
+  <rect x="120" y="366" width="140" height="12" rx="3" fill="#c9b08c"/>
+  <rect x="120" y="392" width="500" height="8" rx="2" fill="rgba(237,224,204,0.16)"/>
+  <rect x="120" y="412" width="430" height="8" rx="2" fill="rgba(237,224,204,0.12)"/>
+  <rect x="120" y="432" width="470" height="8" rx="2" fill="rgba(237,224,204,0.12)"/>
+  <text x="620" y="130" fill="rgba(201,176,140,0.35)" font-family="monospace" font-size="28" font-weight="700">CV</text>
+</svg>
