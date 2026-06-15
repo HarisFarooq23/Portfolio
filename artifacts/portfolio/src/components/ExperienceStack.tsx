@@ -26,7 +26,7 @@ const experienceCards: ExperienceCardData[] = [
   },
   {
   title: 'Chief Technology Officer',
-  org: 'Cynosure Olympiad',
+  org: 'Cynosure',
   period: 'Jan 2024',
   bullets: [
     'Organized Cynosure Olympiad with 250+ participants.',
